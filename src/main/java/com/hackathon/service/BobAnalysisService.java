@@ -2,7 +2,12 @@ package com.hackathon.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hackathon.exception.AssignmentAnalysisException;
 import com.hackathon.model.TaskChecklist;
+import com.hackathon.util.AppConstants;
+import com.hackathon.util.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -11,8 +16,14 @@ import java.util.*;
 import java.io.File;
 import java.nio.file.Files;
 
+/**
+ * Service for interacting with IBM Bob API.
+ * Handles assignment analysis, code generation, and study schedule creation.
+ */
 @Service
 public class BobAnalysisService {
+    
+    private static final Logger logger = LoggerFactory.getLogger(BobAnalysisService.class);
     
     @Value("${bob.api.url}")
     private String bobApiUrl;
@@ -20,8 +31,16 @@ public class BobAnalysisService {
     @Value("${bob.api.key}")
     private String bobApiKey;
     
-    private final RestTemplate restTemplate = new RestTemplate();
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    @Value("${evidence.log.path:./evidence/bob-logs.txt}")
+    private String evidenceLogPath;
+    
+    private final RestTemplate restTemplate;
+    private final ObjectMapper objectMapper;
+    
+    public BobAnalysisService() {
+        this.restTemplate = new RestTemplate();
+        this.objectMapper = new ObjectMapper();
+    }
     
     /**
      * PROMPT 1: Bob analyzes assignment requirements
@@ -639,14 +658,16 @@ public class BobAnalysisService {
 
         // Also write to file for submission evidence
         try {
+            java.nio.file.Path logPath = java.nio.file.Paths.get(evidenceLogPath);
+            java.nio.file.Files.createDirectories(logPath.getParent());
             java.nio.file.Files.writeString(
-                java.nio.file.Paths.get("./evidence/bob-logs.txt"),
+                logPath,
                 log,
                 java.nio.file.StandardOpenOption.CREATE,
                 java.nio.file.StandardOpenOption.APPEND
             );
         } catch (Exception e) {
-            System.err.println("Could not write log: " + e.getMessage());
+            logger.error("Could not write evidence log: {}", e.getMessage());
         }
     }
 }

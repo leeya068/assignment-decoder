@@ -47,13 +47,25 @@ Without clear specifications, students waste hours:
 
 **Total Time Saved: ~2.5 hours per assignment** ⏱️
 
-### UI/UX Features ✨ NEW!
+### UI/UX Features
 - 🌙 **Dark Mode Toggle** - Eye-friendly theme with smooth transitions
 - ⏳ **Loading Animation** - Professional spinner with "Bob is analyzing..." overlay
 - 💻 **Syntax Highlighting** - Beautiful code display with Prism.js (Tomorrow Night theme)
 - 📋 **Copy-to-Clipboard** - One-click copy for code, tests, and schedules
 - 🎨 **Responsive Design** - Works perfectly on desktop, tablet, and mobile
 - 🖨️ **Print Support** - Print-friendly results page
+
+### ✨ NEW: Code Quality & Architecture
+- 🛡️ **Exception Handling** - Custom exceptions with global error handler
+- ✅ **Input Validation** - Bean Validation with clear error messages
+- 📝 **Comprehensive Logging** - SLF4J logging throughout application
+- 📄 **PDF Extraction** - Real PDF parsing with Apache PDFBox
+- 🗂️ **File Management** - Robust file operations with automatic cleanup
+- ⚙️ **Configuration Validation** - Type-safe, validated configuration
+- ⚡ **Async Processing** - Non-blocking Bob API calls with thread pools
+- 🧪 **Unit Tests** - Comprehensive test suite with 30+ tests
+- 📚 **Constants Management** - Centralized constants for maintainability
+- 🎯 **HTTP Status Codes** - Proper REST API responses
 
 ## 🚀 Quick Start
 
@@ -150,11 +162,22 @@ assignment-decoder/
 │   │   └── DecoderController.java      # REST endpoints & request handling
 │   ├── service/
 │   │   ├── BobAnalysisService.java     # IBM Bob integration (5 prompts)
-│   │   └── CodeGeneratorService.java   # Code/test generation logic
+│   │   ├── CodeGeneratorService.java   # Code/test generation logic
+│   │   └── AsyncBobService.java        # ✨ NEW: Async wrapper for Bob API
 │   ├── model/
-│   │   ├── AssignmentRequest.java      # Request DTO
+│   │   ├── AssignmentRequest.java      # Request DTO with validation
 │   │   ├── TaskChecklist.java          # Task model
 │   │   └── BobResponse.java            # Response DTO
+│   ├── config/                         # ✨ NEW: Configuration classes
+│   │   ├── BobApiConfig.java           # Validated Bob API configuration
+│   │   └── AsyncConfig.java            # Async processing configuration
+│   ├── exception/                      # ✨ NEW: Custom exceptions
+│   │   ├── AssignmentAnalysisException.java
+│   │   ├── FileProcessingException.java
+│   │   └── GlobalExceptionHandler.java # Centralized error handling
+│   ├── util/                           # ✨ NEW: Utility classes
+│   │   ├── AppConstants.java           # Centralized constants
+│   │   └── FileUtils.java              # File operations & PDF extraction
 │   └── AssignmentDecoderApplication.java
 ├── src/main/resources/
 │   ├── templates/
@@ -163,6 +186,13 @@ assignment-decoder/
 │   │   └── evidence.html               # Bob interaction logs
 │   ├── static/                         # CSS, JS, images
 │   └── application.properties          # Configuration
+├── src/test/java/com/hackathon/        # ✨ NEW: Comprehensive test suite
+│   ├── service/
+│   │   └── BobAnalysisServiceTest.java # Service layer tests
+│   ├── controller/
+│   │   └── DecoderControllerTest.java  # Controller tests with MockMvc
+│   └── util/
+│       └── FileUtilsTest.java          # Utility tests
 ├── evidence/
 │   ├── bob-prompts.md                  # Formatted Bob interactions
 │   └── screenshots/                    # UI screenshots
@@ -174,7 +204,7 @@ assignment-decoder/
 ├── README.md                           # This file
 ├── SETUP-GUIDE.md                      # Detailed setup instructions
 ├── HACKATHON-CHECKLIST.md              # Submission checklist
-└── IMPROVEMENTS.md                     # Before/after comparison
+└── IMPROVEMENTS.md                     # ✨ NEW: Complete improvements documentation
 ```
 
 ## 🔧 Configuration
@@ -202,6 +232,15 @@ spring.thymeleaf.suffix=.html
 
 ## 🧪 Testing
 
+### ✨ NEW: Comprehensive Test Suite
+
+The application now includes 30+ unit tests covering:
+- Service layer logic (BobAnalysisService)
+- Controller endpoints (DecoderController)
+- Utility functions (FileUtils)
+- Error handling scenarios
+- Edge cases and validation
+
 ```bash
 # Run all tests
 run.bat test
@@ -211,7 +250,19 @@ run.bat test
 
 # View coverage report
 # Open target/site/jacoco/index.html in browser
+
+# Run specific test class
+.\apache-maven-3.9.15\bin\mvn.cmd test -Dtest=BobAnalysisServiceTest
+
+# Run tests with verbose output
+.\apache-maven-3.9.15\bin\mvn.cmd test -X
 ```
+
+### Test Coverage
+- **Service Layer**: 30+ tests for Bob API interactions
+- **Controller Layer**: 10+ tests with MockMvc
+- **Utility Layer**: 15+ tests for file operations
+- **Target Coverage**: 80%+ code coverage
 
 ## 📊 IBM Bob Integration
 
@@ -318,6 +369,8 @@ All Bob interactions are logged for transparency:
 - **Maven 3.9.15** - Dependency management
 - **Thymeleaf** - Server-side templating
 - **Jackson** - JSON processing
+- **SLF4J + Logback** - ✨ Logging framework
+- **Bean Validation** - ✨ Input validation
 
 ### Frontend
 - **HTML5 & CSS3** - Modern web standards
@@ -330,25 +383,49 @@ All Bob interactions are logged for transparency:
 - **IBM Bob API** - AI-powered analysis
 - **REST Client** - HTTP communication
 - **JSON Processing** - Response parsing
+- **CompletableFuture** - ✨ Async processing
 
 ### Testing
 - **JUnit 5** - Unit testing framework
 - **MockMvc** - Controller testing
 - **Mockito** - Mocking framework
 - **Jacoco** - Code coverage
+- **Spring Test** - ✨ Integration testing
 
 ### Additional Libraries
-- **Apache PDFBox 3.0.0** - PDF text extraction
-- **Apache POI** - DOCX processing
+- **Apache PDFBox 3.0.0** - ✨ Real PDF text extraction
+- **Commons IO 2.15.1** - ✨ File utilities
+- **Zip4j 2.11.5** - ✨ ZIP file handling
 - **Lombok** - Boilerplate reduction
 
-## 📝 Future Enhancements
+### Architecture & Patterns
+- **✨ Custom Exception Handling** - Global error management
+- **✨ Configuration Properties** - Type-safe configuration
+- **✨ Async Execution** - Thread pool management
+- **✨ Utility Classes** - Reusable components
+- **✨ Constants Management** - Centralized values
+
+## 📝 Recent Improvements & Future Enhancements
+
+### ✅ Recently Completed (v2.0)
+- [x] **Exception Handling** - Custom exceptions with global handler
+- [x] **Input Validation** - Bean Validation with clear messages
+- [x] **Logging Framework** - SLF4J throughout application
+- [x] **PDF Extraction** - Real PDF parsing with PDFBox
+- [x] **File Management** - Robust operations with cleanup
+- [x] **Configuration Validation** - Type-safe configuration
+- [x] **Async Processing** - Non-blocking Bob API calls
+- [x] **Unit Tests** - 30+ tests with good coverage
+- [x] **Constants Management** - Centralized values
+- [x] **HTTP Status Codes** - Proper REST responses
 
 ### Short-term (Next Sprint)
 - [ ] Download buttons for generated files (CSV, Markdown)
 - [ ] Export results as PDF report
 - [ ] Save/load previous analyses
 - [ ] Email results to student
+- [ ] Integration tests for end-to-end flows
+- [ ] Circuit breaker for Bob API calls
 
 ### Medium-term (Next Quarter)
 - [ ] Real-time collaboration features
@@ -356,6 +433,8 @@ All Bob interactions are logged for transparency:
 - [ ] Support for Python, JavaScript, C++
 - [ ] Mobile app (React Native)
 - [ ] Browser extension
+- [ ] Caching for repeated Bob API calls
+- [ ] Metrics with Micrometer/Prometheus
 
 ### Long-term (Next Year)
 - [ ] AI-powered code review
@@ -364,6 +443,7 @@ All Bob interactions are logged for transparency:
 - [ ] Peer comparison (anonymized)
 - [ ] Gamification (badges, streaks)
 - [ ] LMS integration (Canvas, Moodle)
+- [ ] Database persistence for results
 
 ## 🤝 Contributing
 
