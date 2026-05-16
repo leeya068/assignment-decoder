@@ -475,7 +475,7 @@ public class BobAnalysisService {
             }
             ```
             """;
-        } else if (prompt.contains("study schedule") || prompt.contains("day-by-day")) {
+        } else if (prompt.toLowerCase().contains("study schedule") || prompt.toLowerCase().contains("day-by-day") || prompt.toLowerCase().contains("schedule for completing")) {
             return """
                 # 📅 Study Schedule - Assignment Completion Plan
                 
