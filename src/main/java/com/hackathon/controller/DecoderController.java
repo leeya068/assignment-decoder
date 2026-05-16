@@ -5,6 +5,7 @@ import com.hackathon.model.TaskChecklist;
 import com.hackathon.service.BobAnalysisService;
 import com.hackathon.service.CodeGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -138,5 +139,31 @@ public class DecoderController {
         return "Sample assignment: Build a REST API with CRUD operations for a Student Management System. " +
                "Requirements: Create Student model, implement GET/POST/PUT/DELETE endpoints, " +
                "add validation for email and age, write unit tests achieving 80% coverage.";
+    }
+    
+    @GetMapping("/download/checklist")
+    public ResponseEntity<String> downloadChecklist(@ModelAttribute("checklist") TaskChecklist checklist) {
+        StringBuilder csv = new StringBuilder();
+        csv.append("Task,Priority,Estimated Minutes\n");
+        
+        for (TaskChecklist.Task task : checklist.getTasks()) {
+            csv.append(String.format("\"%s\",\"%s\",\"%s\"\n",
+                task.getDescription(),
+                task.getPriority(),
+                task.getEstimatedMinutes()));
+        }
+        
+        return ResponseEntity.ok()
+            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"task-checklist.csv\"")
+            .header(HttpHeaders.CONTENT_TYPE, "text/csv")
+            .body(csv.toString());
+    }
+
+    @GetMapping("/download/schedule")
+    public ResponseEntity<String> downloadSchedule(@RequestParam String schedule) {
+        return ResponseEntity.ok()
+            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"study-schedule.md\"")
+            .header(HttpHeaders.CONTENT_TYPE, "text/markdown")
+            .body(schedule);
     }
 }
