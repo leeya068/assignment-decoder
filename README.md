@@ -387,7 +387,7 @@ This is a hackathon project, but contributions are welcome!
 MIT License - feel free to use this project for learning and development.
 
 ```
-Copyright (c) 2026 Assignment Decoder Team
+Copyright (c) 2026 Prompt and Circumstances Team
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -404,7 +404,7 @@ copies or substantial portions of the Software.
 
 Built with ❤️ for IBM Hackathon 2026
 
-**Project Lead:** [Your Name]  
+**Project Lead:** Aleeya Nazirah Jamil
 **Role:** Full-stack Developer & IBM Bob Integration Specialist
 
 ## 🙏 Acknowledgments
@@ -414,14 +414,6 @@ Built with ❤️ for IBM Hackathon 2026
 - **Prism.js Team** - For beautiful syntax highlighting
 - **All Students** - Who struggle with vague assignments 😅
 - **Hackathon Organizers** - For this amazing opportunity
-
-## 📚 Additional Resources
-
-- **[SETUP-GUIDE.md](SETUP-GUIDE.md)** - Detailed setup instructions
-- **[HACKATHON-CHECKLIST.md](HACKATHON-CHECKLIST.md)** - Submission checklist
-- **[IMPROVEMENTS.md](IMPROVEMENTS.md)** - Before/after comparison
-- **[FUTURE-IMPROVEMENTS.md](FUTURE-IMPROVEMENTS.md)** - 30 enhancement ideas
-- **[QUICK-IMPLEMENTATION-GUIDE.md](QUICK-IMPLEMENTATION-GUIDE.md)** - Ready-to-use code
 
 ## 🐛 Troubleshooting
 
