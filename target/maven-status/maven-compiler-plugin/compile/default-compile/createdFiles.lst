@@ -1,0 +1,15 @@
+com\hackathon\model\BobResponse$CodeBlock.class
+com\hackathon\model\BobResponse$DailyPlan.class
+com\hackathon\model\BobResponse$Schedule.class
+com\hackathon\model\BobResponse$TaskItem.class
+com\hackathon\model\TaskChecklist.class
+com\hackathon\model\BobResponse$Metadata.class
+com\hackathon\service\BobAnalysisService.class
+com\hackathon\model\AssignmentRequest.class
+com\hackathon\model\BobResponse.class
+com\hackathon\controller\DecoderController.class
+com\hackathon\model\BobResponse$CodeSuggestion.class
+com\hackathon\model\TaskChecklist$Task.class
+com\hackathon\model\BobResponse$TestCase.class
+com\hackathon\service\CodeGeneratorService.class
+com\hackathon\AssignmentDecoderApplication.class

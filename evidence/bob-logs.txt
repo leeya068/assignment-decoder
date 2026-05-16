@@ -1,0 +1,408 @@
+
+═══════════════════════════════════════════════════
+📝 BOB INTERACTION: PROMPT 1: Assignment Analysis
+═══════════════════════════════════════════════════
+
+🔹 PROMPT SENT TO BOB:
+You are IBM Bob, an AI-powered development partner.
+
+TASK: Analyze this programming assignment and create an actionable checklist.
+
+COURSE: CS-101 INTRODUCTION TO PROGRAMMING
+
+ASSIGNMENT TEXT:
+Sample assignment: Build a REST API with CRUD operations for a Student Management System. Requirements: Create Student model, implement GET/POST/PUT/DELETE endpoints, add validation for email and age, write unit tests achieving 80% coverage.
+
+STUDENT'S EXISTING CODE:
+// No existing code found
+
+Please respond with a JSON structure containing:
+1. A checklist of specific tasks required to complete this assignment
+2. For each task: description, priority (HIGH/MEDIUM/LOW), estimated time (minutes), and which file to modify
+3. Identify which requirements are ALREADY satisfied by existing code (mark as complete)
+4. Flag any ambiguous requirements that need clarification
+
+Be SPECIFIC. Instead of "implement sorting", write "implement bubble sort in sortArray() method".
+
+
+🔹 BOB'S RESPONSE:
+{
+  "tasks": [
+    {"description": "Create User class with name, email, id fields", "priority": "HIGH", "minutes": 15},
+    {"description": "Implement UserService.saveUser() method with validation", "priority": "HIGH", "minutes": 30},
+    {"description": "Add email format validation using regex", "priority": "MEDIUM", "minutes": 10},
+    {"description": "Write JUnit tests for UserService", "priority": "HIGH", "minutes": 20},
+    {"description": "Handle duplicate user ID exception", "priority": "
+
+═══════════════════════════════════════════════════
+
+═══════════════════════════════════════════════════
+📝 BOB INTERACTION: PROMPT 3: Code Stub Generation
+═══════════════════════════════════════════════════
+
+🔹 PROMPT SENT TO BOB:
+As IBM Bob, generate a Java code stub for this requirement:
+"Sample assignment: Build a REST API with CRUD operations for a Student Management System. Requirements: Create Student model, implement GET/POST/PUT/DELETE endpoints, add validation for email and age, write unit tests achieving 80% coverage."
+
+Include:
+1. Method signature with proper JavaDoc comments
+2. @param and @return annotations
+3. TODO comments for where student should fill logic
+4. Proper exception handling placeholders
+
+Language: Java 17
+
+
+🔹 BOB'S RESPONSE:
+```java
+/**
+ * Validates email format according to standard regex pattern.
+ * @param email The email string to validate
+ * @return true if email format is valid, false otherwise
+ * @throws IllegalArgumentException if email is null
+ */
+public boolean validateEmail(String email) {
+    // TODO: Implement email validation logic
+    // Hint: Use Pattern.compile("^[A-Za-z0-9+_.-]+@(.+)$")
+    return false;
+}
+
+
+═══════════════════════════════════════════════════
+
+═══════════════════════════════════════════════════
+📝 BOB INTERACTION: PROMPT 4: Test Case Generation
+═══════════════════════════════════════════════════
+
+🔹 PROMPT SENT TO BOB:
+As IBM Bob, generate JUnit 5 test cases for this requirement:
+"Sample assignment: Build a REST API with CRUD operations for a Student Management System. Requirements: Create Student model, implement GET/POST/PUT/DELETE endpoints, add validation for email and age, write unit tests achieving 80% coverage."
+
+Expected outputs/scenarios: [Valid input, Edge cases]
+
+Generate test methods with:
+- @Test annotation
+- Assertions (assertEquals, assertTrue, assertThrows)
+- Edge cases and boundary conditions
+- @DisplayName with descriptive test names
+
+
+🔹 BOB'S RESPONSE:
+@Test
+@DisplayName("Should validate correct email format")
+void testValidEmail() {
+    UserService service = new UserService();
+    assertTrue(service.validateEmail("student@university.edu"));
+}
+
+@Test
+@DisplayName("Should reject email without @ symbol")
+void testInvalidEmailMissingAt() {
+    UserService service = new UserService();
+    assertFalse(service.validateEmail("student.university.edu"));
+}
+
+@Test
+@DisplayName("Should throw exception for null email")
+void testNullEmailThrowsException() 
+
+═══════════════════════════════════════════════════
+
+═══════════════════════════════════════════════════
+📝 BOB INTERACTION: PROMPT 5: Study Schedule Generation
+═══════════════════════════════════════════════════
+
+🔹 PROMPT SENT TO BOB:
+As IBM Bob, create a day-by-day study schedule for completing these tasks before 2026-05-17.
+
+TASKS (with estimated minutes):
+- Create User class with name, email, id fields (15 min, HIGH priority)
+- Implement UserService.saveUser() method with validation (30 min, HIGH priority)
+- Add email format validation using regex (10 min, MEDIUM priority)
+- Write JUnit tests for UserService (20 min, HIGH priority)
+- Handle duplicate user ID exception (15 min, LOW priority)
+
+
+Return a schedule with:
+- Daily breakdown (assuming 2 hours/day of focused work)
+- Which tasks to prioritize each day
+- Rest day recommendations
+- Checklist format with checkboxes
+
+
+🔹 BOB'S RESPONSE:
+{"response": "Bob has analyzed your request"}
+
+═══════════════════════════════════════════════════
+
+═══════════════════════════════════════════════════
+📝 BOB INTERACTION: PROMPT 1: Assignment Analysis
+═══════════════════════════════════════════════════
+
+🔹 PROMPT SENT TO BOB:
+You are IBM Bob, an AI-powered development partner.
+
+TASK: Analyze this programming assignment and create an actionable checklist.
+
+COURSE: CS-101 INTRODUCTION TO PROGRAMMING
+
+ASSIGNMENT TEXT:
+Sample assignment: Build a REST API with CRUD operations for a Student Management System. Requirements: Create Student model, implement GET/POST/PUT/DELETE endpoints, add validation for email and age, write unit tests achieving 80% coverage.
+
+STUDENT'S EXISTING CODE:
+// No existing code found
+
+Please respond with a JSON structure containing:
+1. A checklist of specific tasks required to complete this assignment
+2. For each task: description, priority (HIGH/MEDIUM/LOW), estimated time (minutes), and which file to modify
+3. Identify which requirements are ALREADY satisfied by existing code (mark as complete)
+4. Flag any ambiguous requirements that need clarification
+
+Be SPECIFIC. Instead of "implement sorting", write "implement bubble sort in sortArray() method".
+
+
+🔹 BOB'S RESPONSE:
+{
+  "tasks": [
+    {"description": "Create User class with name, email, id fields", "priority": "HIGH", "minutes": 15},
+    {"description": "Implement UserService.saveUser() method with validation", "priority": "HIGH", "minutes": 30},
+    {"description": "Add email format validation using regex", "priority": "MEDIUM", "minutes": 10},
+    {"description": "Write JUnit tests for UserService", "priority": "HIGH", "minutes": 20},
+    {"description": "Handle duplicate user ID exception", "priority": "
+
+═══════════════════════════════════════════════════
+
+═══════════════════════════════════════════════════
+📝 BOB INTERACTION: PROMPT 3: Code Stub Generation
+═══════════════════════════════════════════════════
+
+🔹 PROMPT SENT TO BOB:
+As IBM Bob, generate a Java code stub for this requirement:
+"Sample assignment: Build a REST API with CRUD operations for a Student Management System. Requirements: Create Student model, implement GET/POST/PUT/DELETE endpoints, add validation for email and age, write unit tests achieving 80% coverage."
+
+Include:
+1. Method signature with proper JavaDoc comments
+2. @param and @return annotations
+3. TODO comments for where student should fill logic
+4. Proper exception handling placeholders
+
+Language: Java 17
+
+
+🔹 BOB'S RESPONSE:
+```java
+/**
+ * Validates email format according to standard regex pattern.
+ * @param email The email string to validate
+ * @return true if email format is valid, false otherwise
+ * @throws IllegalArgumentException if email is null
+ */
+public boolean validateEmail(String email) {
+    // TODO: Implement email validation logic
+    // Hint: Use Pattern.compile("^[A-Za-z0-9+_.-]+@(.+)$")
+    return false;
+}
+
+
+═══════════════════════════════════════════════════
+
+═══════════════════════════════════════════════════
+📝 BOB INTERACTION: PROMPT 4: Test Case Generation
+═══════════════════════════════════════════════════
+
+🔹 PROMPT SENT TO BOB:
+As IBM Bob, generate JUnit 5 test cases for this requirement:
+"Sample assignment: Build a REST API with CRUD operations for a Student Management System. Requirements: Create Student model, implement GET/POST/PUT/DELETE endpoints, add validation for email and age, write unit tests achieving 80% coverage."
+
+Expected outputs/scenarios: [Valid input, Edge cases]
+
+Generate test methods with:
+- @Test annotation
+- Assertions (assertEquals, assertTrue, assertThrows)
+- Edge cases and boundary conditions
+- @DisplayName with descriptive test names
+
+
+🔹 BOB'S RESPONSE:
+@Test
+@DisplayName("Should validate correct email format")
+void testValidEmail() {
+    UserService service = new UserService();
+    assertTrue(service.validateEmail("student@university.edu"));
+}
+
+@Test
+@DisplayName("Should reject email without @ symbol")
+void testInvalidEmailMissingAt() {
+    UserService service = new UserService();
+    assertFalse(service.validateEmail("student.university.edu"));
+}
+
+@Test
+@DisplayName("Should throw exception for null email")
+void testNullEmailThrowsException() 
+
+═══════════════════════════════════════════════════
+
+═══════════════════════════════════════════════════
+📝 BOB INTERACTION: PROMPT 5: Study Schedule Generation
+═══════════════════════════════════════════════════
+
+🔹 PROMPT SENT TO BOB:
+As IBM Bob, create a day-by-day study schedule for completing these tasks before 2026-05-17.
+
+TASKS (with estimated minutes):
+- Create User class with name, email, id fields (15 min, HIGH priority)
+- Implement UserService.saveUser() method with validation (30 min, HIGH priority)
+- Add email format validation using regex (10 min, MEDIUM priority)
+- Write JUnit tests for UserService (20 min, HIGH priority)
+- Handle duplicate user ID exception (15 min, LOW priority)
+
+
+Return a schedule with:
+- Daily breakdown (assuming 2 hours/day of focused work)
+- Which tasks to prioritize each day
+- Rest day recommendations
+- Checklist format with checkboxes
+
+
+🔹 BOB'S RESPONSE:
+{"response": "Bob has analyzed your request"}
+
+═══════════════════════════════════════════════════
+
+═══════════════════════════════════════════════════
+📝 BOB INTERACTION: PROMPT 1: Assignment Analysis
+═══════════════════════════════════════════════════
+
+🔹 PROMPT SENT TO BOB:
+You are IBM Bob, an AI-powered development partner.
+
+TASK: Analyze this programming assignment and create an actionable checklist.
+
+COURSE: CS-101 INTRODUCTION TO PROGRAMMING
+
+ASSIGNMENT TEXT:
+Sample assignment: Build a REST API with CRUD operations for a Student Management System. Requirements: Create Student model, implement GET/POST/PUT/DELETE endpoints, add validation for email and age, write unit tests achieving 80% coverage.
+
+STUDENT'S EXISTING CODE:
+// No existing code found
+
+Please respond with a JSON structure containing:
+1. A checklist of specific tasks required to complete this assignment
+2. For each task: description, priority (HIGH/MEDIUM/LOW), estimated time (minutes), and which file to modify
+3. Identify which requirements are ALREADY satisfied by existing code (mark as complete)
+4. Flag any ambiguous requirements that need clarification
+
+Be SPECIFIC. Instead of "implement sorting", write "implement bubble sort in sortArray() method".
+
+
+🔹 BOB'S RESPONSE:
+{
+  "tasks": [
+    {"description": "Create User class with name, email, id fields", "priority": "HIGH", "minutes": 15},
+    {"description": "Implement UserService.saveUser() method with validation", "priority": "HIGH", "minutes": 30},
+    {"description": "Add email format validation using regex", "priority": "MEDIUM", "minutes": 10},
+    {"description": "Write JUnit tests for UserService", "priority": "HIGH", "minutes": 20},
+    {"description": "Handle duplicate user ID exception", "priority": "
+
+═══════════════════════════════════════════════════
+
+═══════════════════════════════════════════════════
+📝 BOB INTERACTION: PROMPT 3: Code Stub Generation
+═══════════════════════════════════════════════════
+
+🔹 PROMPT SENT TO BOB:
+As IBM Bob, generate a Java code stub for this requirement:
+"Sample assignment: Build a REST API with CRUD operations for a Student Management System. Requirements: Create Student model, implement GET/POST/PUT/DELETE endpoints, add validation for email and age, write unit tests achieving 80% coverage."
+
+Include:
+1. Method signature with proper JavaDoc comments
+2. @param and @return annotations
+3. TODO comments for where student should fill logic
+4. Proper exception handling placeholders
+
+Language: Java 17
+
+
+🔹 BOB'S RESPONSE:
+```java
+/**
+ * Validates email format according to standard regex pattern.
+ * @param email The email string to validate
+ * @return true if email format is valid, false otherwise
+ * @throws IllegalArgumentException if email is null
+ */
+public boolean validateEmail(String email) {
+    // TODO: Implement email validation logic
+    // Hint: Use Pattern.compile("^[A-Za-z0-9+_.-]+@(.+)$")
+    return false;
+}
+
+
+═══════════════════════════════════════════════════
+
+═══════════════════════════════════════════════════
+📝 BOB INTERACTION: PROMPT 4: Test Case Generation
+═══════════════════════════════════════════════════
+
+🔹 PROMPT SENT TO BOB:
+As IBM Bob, generate JUnit 5 test cases for this requirement:
+"Sample assignment: Build a REST API with CRUD operations for a Student Management System. Requirements: Create Student model, implement GET/POST/PUT/DELETE endpoints, add validation for email and age, write unit tests achieving 80% coverage."
+
+Expected outputs/scenarios: [Valid input, Edge cases]
+
+Generate test methods with:
+- @Test annotation
+- Assertions (assertEquals, assertTrue, assertThrows)
+- Edge cases and boundary conditions
+- @DisplayName with descriptive test names
+
+
+🔹 BOB'S RESPONSE:
+@Test
+@DisplayName("Should validate correct email format")
+void testValidEmail() {
+    UserService service = new UserService();
+    assertTrue(service.validateEmail("student@university.edu"));
+}
+
+@Test
+@DisplayName("Should reject email without @ symbol")
+void testInvalidEmailMissingAt() {
+    UserService service = new UserService();
+    assertFalse(service.validateEmail("student.university.edu"));
+}
+
+@Test
+@DisplayName("Should throw exception for null email")
+void testNullEmailThrowsException() 
+
+═══════════════════════════════════════════════════
+
+═══════════════════════════════════════════════════
+📝 BOB INTERACTION: PROMPT 5: Study Schedule Generation
+═══════════════════════════════════════════════════
+
+🔹 PROMPT SENT TO BOB:
+As IBM Bob, create a day-by-day study schedule for completing these tasks before 2026-05-17.
+
+TASKS (with estimated minutes):
+- Create User class with name, email, id fields (15 min, HIGH priority)
+- Implement UserService.saveUser() method with validation (30 min, HIGH priority)
+- Add email format validation using regex (10 min, MEDIUM priority)
+- Write JUnit tests for UserService (20 min, HIGH priority)
+- Handle duplicate user ID exception (15 min, LOW priority)
+
+
+Return a schedule with:
+- Daily breakdown (assuming 2 hours/day of focused work)
+- Which tasks to prioritize each day
+- Rest day recommendations
+- Checklist format with checkboxes
+
+
+🔹 BOB'S RESPONSE:
+{"response": "Bob has analyzed your request"}
+
+═══════════════════════════════════════════════════
