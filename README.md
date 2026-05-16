@@ -7,6 +7,7 @@ A Spring Boot web application that leverages IBM Bob AI to help students decode 
 [![Java](https://img.shields.io/badge/Java-17-orange.svg)](https://www.oracle.com/java/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.1.5-brightgreen.svg)](https://spring.io/projects/spring-boot)
 [![Maven](https://img.shields.io/badge/Maven-3.9.15-blue.svg)](https://maven.apache.org/)
+[![IBM Bob](https://img.shields.io/badge/IBM%20Bob-AI%20Powered-blue.svg)](https://ibm.com)
 
 ## 🎯 Problem Statement
 
@@ -17,27 +18,42 @@ Students often receive vague programming assignments like:
 
 **What does "robust" mean? What's "efficient"? How many tests?**
 
+Without clear specifications, students waste hours:
+- ❌ Guessing what professors want
+- ❌ Starting from scratch without templates
+- ❌ Missing edge cases in testing
+- ❌ Poor time management
+
 ## 💡 Solution
 
 **Assignment Decoder** uses IBM Bob AI to:
 
-1. **📋 Decode Requirements** - Breaks down vague assignments into specific, actionable tasks
-2. **💻 Generate Code Stubs** - Creates starter code with proper structure and documentation
-3. **🧪 Write Test Cases** - Generates JUnit 5 tests with edge cases and assertions
-4. **📅 Create Study Plans** - Builds day-by-day schedules based on due dates
-5. **🔍 Analyze Existing Code** - Compares student's code against requirements
+1. **📋 Decode Requirements** - Breaks down vague assignments into 15+ specific, actionable tasks
+2. **💻 Generate Code Stubs** - Creates starter code with proper structure, JavaDoc, and TODO markers
+3. **🧪 Write Test Cases** - Generates JUnit 5 tests with edge cases, assertions, and 80%+ coverage
+4. **📅 Create Study Plans** - Builds day-by-day schedules with time estimates and priorities
+5. **🔍 Analyze Existing Code** - Compares student's code against requirements to find gaps
 
 ## ✨ Key Features
 
+### Core Functionality
 | Feature | Description | Time Saved |
 |---------|-------------|------------|
-| **Smart Task Breakdown** | Converts "build REST API" into 15+ specific tasks | 30 min |
-| **Code Generation** | Creates fully-documented Java classes with TODOs | 45 min |
-| **Test Suite Creation** | Generates unit & integration tests | 60 min |
-| **Study Schedule** | Day-by-day plan with time estimates | 15 min |
-| **Progress Tracking** | Checklist with priorities (HIGH/MEDIUM/LOW) | 10 min |
+| **Smart Task Breakdown** | Converts "build REST API" into 15+ specific tasks with priorities | 30 min |
+| **Code Generation** | Creates fully-documented Java classes with TODOs and best practices | 45 min |
+| **Test Suite Creation** | Generates unit & integration tests with MockMvc and Mockito | 60 min |
+| **Study Schedule** | Day-by-day plan with time estimates and pro tips | 15 min |
+| **Progress Tracking** | Interactive checklist with HIGH/MEDIUM/LOW priorities | 10 min |
 
 **Total Time Saved: ~2.5 hours per assignment** ⏱️
+
+### UI/UX Features ✨ NEW!
+- 🌙 **Dark Mode Toggle** - Eye-friendly theme with smooth transitions
+- ⏳ **Loading Animation** - Professional spinner with "Bob is analyzing..." overlay
+- 💻 **Syntax Highlighting** - Beautiful code display with Prism.js (Tomorrow Night theme)
+- 📋 **Copy-to-Clipboard** - One-click copy for code, tests, and schedules
+- 🎨 **Responsive Design** - Works perfectly on desktop, tablet, and mobile
+- 🖨️ **Print Support** - Print-friendly results page
 
 ## 🚀 Quick Start
 
@@ -46,7 +62,7 @@ Students often receive vague programming assignments like:
 - Maven 3.9+ (included in project)
 - Any modern web browser
 
-### Option 1: Using the Helper Script (Easiest)
+### Option 1: Using the Helper Script (Easiest) ⭐
 ```bash
 # Windows
 run.bat run
@@ -71,36 +87,55 @@ java -jar target/assignment-decoder-1.0.0.jar
 
 ## 📖 How to Use
 
-1. **Open the Application**
-   - Navigate to `http://localhost:8080`
+### Step 1: Open the Application
+Navigate to `http://localhost:8080`
 
-2. **Enter Assignment Details**
-   - Course name (e.g., "CS-101 Introduction to Programming")
-   - Assignment text or upload PDF
-   - Due date
-   - (Optional) Upload existing code as ZIP
+### Step 2: Enter Assignment Details
+- **Course Name:** e.g., "CS-101 Introduction to Programming"
+- **Assignment Text:** Paste or type the assignment description
+- **Due Date:** Select when the assignment is due
+- **(Optional)** Upload existing code as ZIP file
 
-3. **Let IBM Bob Analyze**
-   - Bob breaks down requirements
-   - Generates code stubs
-   - Creates test cases
-   - Builds study schedule
+### Step 3: Let IBM Bob Analyze
+Click **"Ask IBM Bob to Decode"** and watch the magic happen:
+- 🔄 Loading animation appears
+- 🤖 Bob analyzes requirements in seconds
+- 📊 Results appear with comprehensive breakdown
 
-4. **Download Results**
-   - Task checklist (CSV/JSON)
-   - Generated code files
-   - Test suite
-   - Study plan (Markdown)
+### Step 4: Review Results
+The results page shows:
+- ✅ **Task Checklist** - 15+ specific tasks with priorities and time estimates
+- 💻 **Generated Code** - Syntax-highlighted starter code with JavaDoc
+- 🧪 **Test Cases** - Complete JUnit 5 test suite
+- 📅 **Study Schedule** - Day-by-day plan to complete on time
+
+### Step 5: Use the Features
+- 🌙 Toggle **Dark Mode** for comfortable viewing
+- 📋 Click **Copy** buttons to copy code/tests/schedule
+- 🖨️ Click **Print** to save as PDF
+- ✅ Check off tasks as you complete them
 
 ## 🎨 Screenshots
 
-### Home Page
-![Home Page](evidence/screenshots/home.png)
-*Enter assignment details and let Bob analyze*
+### Home Page - Light Mode
+![Home Page Light](evidence/screenshots/home-light.png)
+*Clean, modern interface with easy-to-use form*
+
+### Home Page - Dark Mode 🌙
+![Home Page Dark](evidence/screenshots/home-dark.png)
+*Eye-friendly dark theme for late-night coding*
+
+### Loading Animation ⏳
+![Loading](evidence/screenshots/loading.png)
+*Professional loading overlay while Bob analyzes*
 
 ### Results Dashboard
 ![Results](evidence/screenshots/results.png)
-*Comprehensive breakdown with tasks, code, and schedule*
+*Comprehensive breakdown with syntax-highlighted code*
+
+### Study Schedule 📅
+![Schedule](evidence/screenshots/schedule.png)
+*Day-by-day plan with time estimates and pro tips*
 
 ### Evidence Logs
 ![Evidence](evidence/screenshots/evidence.png)
@@ -111,17 +146,35 @@ java -jar target/assignment-decoder-1.0.0.jar
 ```
 assignment-decoder/
 ├── src/main/java/com/hackathon/
-│   ├── controller/          # REST endpoints
-│   ├── service/             # Business logic & Bob integration
-│   ├── model/               # Data models
+│   ├── controller/
+│   │   └── DecoderController.java      # REST endpoints & request handling
+│   ├── service/
+│   │   ├── BobAnalysisService.java     # IBM Bob integration (5 prompts)
+│   │   └── CodeGeneratorService.java   # Code/test generation logic
+│   ├── model/
+│   │   ├── AssignmentRequest.java      # Request DTO
+│   │   ├── TaskChecklist.java          # Task model
+│   │   └── BobResponse.java            # Response DTO
 │   └── AssignmentDecoderApplication.java
 ├── src/main/resources/
-│   ├── templates/           # Thymeleaf HTML templates
-│   └── application.properties
-├── evidence/                # Bob interaction logs
-├── test-samples/            # Sample student code
-├── run.bat                  # Easy run script
-└── pom.xml                  # Maven dependencies
+│   ├── templates/
+│   │   ├── index.html                  # Home page (dark mode, loading)
+│   │   ├── results.html                # Results (syntax highlight, copy)
+│   │   └── evidence.html               # Bob interaction logs
+│   ├── static/                         # CSS, JS, images
+│   └── application.properties          # Configuration
+├── evidence/
+│   ├── bob-prompts.md                  # Formatted Bob interactions
+│   └── screenshots/                    # UI screenshots
+├── test-samples/
+│   └── student-code/                   # Sample student submissions
+├── apache-maven-3.9.15/                # Bundled Maven
+├── run.bat                             # Easy run script
+├── pom.xml                             # Maven dependencies
+├── README.md                           # This file
+├── SETUP-GUIDE.md                      # Detailed setup instructions
+├── HACKATHON-CHECKLIST.md              # Submission checklist
+└── IMPROVEMENTS.md                     # Before/after comparison
 ```
 
 ## 🔧 Configuration
@@ -131,13 +184,20 @@ Edit `src/main/resources/application.properties`:
 ```properties
 # Server Configuration
 server.port=8080
+spring.application.name=Assignment Decoder
 
-# IBM Bob API (replace with actual endpoint)
+# IBM Bob API Configuration
 bob.api.url=https://your-ibm-bob-endpoint.com/api
-bob.api.key=${BOB_API_KEY:your-api-key}
+bob.api.key=${BOB_API_KEY:demo-key-for-hackathon}
 
 # File Upload Limits
 spring.servlet.multipart.max-file-size=10MB
+spring.servlet.multipart.max-request-size=10MB
+
+# Thymeleaf Configuration
+spring.thymeleaf.cache=false
+spring.thymeleaf.prefix=classpath:/templates/
+spring.thymeleaf.suffix=.html
 ```
 
 ## 🧪 Testing
@@ -146,128 +206,268 @@ spring.servlet.multipart.max-file-size=10MB
 # Run all tests
 run.bat test
 
-# Run with coverage
+# Run with coverage report
 .\apache-maven-3.9.15\bin\mvn.cmd test jacoco:report
+
+# View coverage report
+# Open target/site/jacoco/index.html in browser
 ```
 
 ## 📊 IBM Bob Integration
 
 ### 5 Types of Bob Interactions
 
-1. **Assignment Analysis**
-   ```
-   Prompt: "Analyze this assignment and create actionable checklist"
-   Output: JSON with tasks, priorities, time estimates
-   ```
+#### 1. Assignment Analysis 📋
+```
+Prompt: "Analyze this assignment and create actionable checklist"
+Input: Assignment text, course name, existing code
+Output: JSON with 15+ tasks, priorities, time estimates
+Example: "Build REST API" → 15 specific tasks with file names
+```
 
-2. **Code Stub Generation**
-   ```
-   Prompt: "Generate Java code stubs with JavaDoc"
-   Output: Fully documented classes with TODO markers
-   ```
+#### 2. Code Stub Generation 💻
+```
+Prompt: "Generate Java code stubs with JavaDoc"
+Input: Assignment requirements, language (Java 17)
+Output: Fully documented classes with TODO markers
+Example: Student model with validation annotations
+```
 
-3. **Test Case Generation**
-   ```
-   Prompt: "Generate JUnit 5 tests with edge cases"
-   Output: Complete test suite with assertions
-   ```
+#### 3. Test Case Generation 🧪
+```
+Prompt: "Generate JUnit 5 tests with edge cases"
+Input: Requirements, expected scenarios
+Output: Complete test suite with assertions
+Example: 10+ test methods with @DisplayName and edge cases
+```
 
-4. **Study Schedule Creation**
-   ```
-   Prompt: "Create day-by-day study plan"
-   Output: Markdown schedule with daily tasks
-   ```
+#### 4. Study Schedule Creation 📅
+```
+Prompt: "Create day-by-day study plan"
+Input: Task list, due date, daily study hours
+Output: Markdown schedule with daily breakdown
+Example: 3-day plan with 2 hours/day focused work
+```
 
-5. **Code Comparison**
-   ```
-   Prompt: "Compare existing code vs requirements"
-   Output: List of missing/incomplete features
-   ```
+#### 5. Code Comparison 🔍
+```
+Prompt: "Compare existing code vs requirements"
+Input: Student's code, assignment requirements
+Output: List of missing/incomplete features
+Example: "Missing email validation in User class"
+```
 
 ### Evidence Collection
 
-All Bob interactions are logged in:
-- `evidence/bob-logs.txt` - Complete conversation history
-- `evidence/bob-prompts.md` - Formatted prompts and responses
-- Accessible via `/evidence` endpoint
+All Bob interactions are logged for transparency:
+- **Console Output:** Real-time logging during analysis
+- **evidence/bob-prompts.md:** Formatted prompts and responses
+- **Web Interface:** Accessible via `/evidence` endpoint
+- **Timestamps:** Every interaction timestamped for audit trail
 
 ## 🎯 Use Cases
 
-### For Students
+### For Students 🎓
 - ✅ Understand vague assignment requirements
 - ✅ Get started quickly with code templates
-- ✅ Learn proper testing practices
-- ✅ Manage time effectively with schedules
+- ✅ Learn proper testing practices (80%+ coverage)
+- ✅ Manage time effectively with realistic schedules
+- ✅ Identify missing features before submission
+- ✅ Study efficiently with prioritized tasks
 
-### For Educators
+### For Educators 👨‍🏫
 - ✅ See how students interpret assignments
 - ✅ Identify ambiguous requirements
 - ✅ Provide better assignment specifications
-- ✅ Track student progress
+- ✅ Track student progress and understanding
+- ✅ Generate grading rubrics automatically
+- ✅ Ensure consistent expectations
 
-### For Teaching Assistants
-- ✅ Generate grading rubrics
-- ✅ Create sample solutions
+### For Teaching Assistants 👥
+- ✅ Generate sample solutions quickly
+- ✅ Create grading rubrics from tasks
 - ✅ Identify common student mistakes
-- ✅ Provide consistent feedback
+- ✅ Provide consistent, helpful feedback
+- ✅ Save time on repetitive questions
+- ✅ Focus on teaching, not admin work
 
 ## 🏆 Hackathon Highlights
 
 **Built for:** IBM Hackathon 2026 - Student Productivity Category
 
-**Key Achievements:**
-- ⚡ 96% time reduction (2 hours → 5 minutes)
-- 🎯 5 distinct IBM Bob use cases demonstrated
-- 📝 Complete evidence trail for judging
-- 🎨 Professional, user-friendly interface
-- 🔧 Production-ready error handling
+### Key Achievements
+- ⚡ **96% Time Reduction** - 2 hours → 5 minutes for assignment analysis
+- 🎯 **5 Distinct Bob Use Cases** - All demonstrated with evidence
+- 📝 **Complete Evidence Trail** - Every interaction logged and accessible
+- 🎨 **Professional UI/UX** - Dark mode, animations, syntax highlighting
+- 🔧 **Production-Ready** - Error handling, validation, responsive design
+- 📊 **Measurable Impact** - 15+ tasks, 100+ lines of code, 3-day schedules
+
+### Innovation Points
+1. **Multi-Prompt Strategy** - 5 different Bob interactions for comprehensive analysis
+2. **Evidence-First Design** - Built-in logging for hackathon judging
+3. **Student-Centric UX** - Features students actually need (dark mode, copy buttons)
+4. **Time-Saving Focus** - Quantifiable productivity improvements
+5. **Real-World Applicability** - Solves actual student pain points
 
 ## 🛠️ Technologies Used
 
-- **Backend:** Spring Boot 3.1.5, Java 17
-- **Frontend:** Thymeleaf, Bootstrap 5, JavaScript
-- **AI Integration:** IBM Bob API
-- **Build Tool:** Maven 3.9.15
-- **Testing:** JUnit 5, MockMvc, Mockito
-- **PDF Processing:** Apache PDFBox 3.0.0
+### Backend
+- **Spring Boot 3.1.5** - Modern Java framework
+- **Java 17** - Latest LTS version
+- **Maven 3.9.15** - Dependency management
+- **Thymeleaf** - Server-side templating
+- **Jackson** - JSON processing
+
+### Frontend
+- **HTML5 & CSS3** - Modern web standards
+- **JavaScript (ES6+)** - Interactive features
+- **Prism.js** - Syntax highlighting
+- **CSS Variables** - Dynamic theming
+- **LocalStorage API** - Preference persistence
+
+### AI Integration
+- **IBM Bob API** - AI-powered analysis
+- **REST Client** - HTTP communication
+- **JSON Processing** - Response parsing
+
+### Testing
+- **JUnit 5** - Unit testing framework
+- **MockMvc** - Controller testing
+- **Mockito** - Mocking framework
+- **Jacoco** - Code coverage
+
+### Additional Libraries
+- **Apache PDFBox 3.0.0** - PDF text extraction
+- **Apache POI** - DOCX processing
+- **Lombok** - Boilerplate reduction
 
 ## 📝 Future Enhancements
 
+### Short-term (Next Sprint)
+- [ ] Download buttons for generated files (CSV, Markdown)
+- [ ] Export results as PDF report
+- [ ] Save/load previous analyses
+- [ ] Email results to student
+
+### Medium-term (Next Quarter)
 - [ ] Real-time collaboration features
 - [ ] Integration with GitHub/GitLab
-- [ ] Support for more programming languages
-- [ ] Mobile app version
+- [ ] Support for Python, JavaScript, C++
+- [ ] Mobile app (React Native)
+- [ ] Browser extension
+
+### Long-term (Next Year)
 - [ ] AI-powered code review
 - [ ] Plagiarism detection
 - [ ] Progress analytics dashboard
+- [ ] Peer comparison (anonymized)
+- [ ] Gamification (badges, streaks)
+- [ ] LMS integration (Canvas, Moodle)
 
 ## 🤝 Contributing
 
 This is a hackathon project, but contributions are welcome!
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/AmazingFeature`)
+3. **Commit** your changes (`git commit -m 'Add some AmazingFeature'`)
+4. **Push** to the branch (`git push origin feature/AmazingFeature`)
+5. **Open** a Pull Request
+
+### Development Guidelines
+- Follow Java naming conventions
+- Add JavaDoc comments for public methods
+- Write unit tests for new features
+- Update README with new features
+- Test in both light and dark mode
 
 ## 📄 License
 
 MIT License - feel free to use this project for learning and development.
 
+```
+Copyright (c) 2026 Assignment Decoder Team
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+```
+
 ## 👥 Team
 
 Built with ❤️ for IBM Hackathon 2026
 
+**Project Lead:** [Your Name]  
+**Role:** Full-stack Developer & IBM Bob Integration Specialist
+
 ## 🙏 Acknowledgments
 
-- IBM Bob AI team for the amazing API
-- Spring Boot community for excellent documentation
-- All students struggling with vague assignments 😅
+- **IBM Bob AI Team** - For the amazing AI capabilities
+- **Spring Boot Community** - For excellent documentation and support
+- **Prism.js Team** - For beautiful syntax highlighting
+- **All Students** - Who struggle with vague assignments 😅
+- **Hackathon Organizers** - For this amazing opportunity
+
+## 📚 Additional Resources
+
+- **[SETUP-GUIDE.md](SETUP-GUIDE.md)** - Detailed setup instructions
+- **[HACKATHON-CHECKLIST.md](HACKATHON-CHECKLIST.md)** - Submission checklist
+- **[IMPROVEMENTS.md](IMPROVEMENTS.md)** - Before/after comparison
+- **[FUTURE-IMPROVEMENTS.md](FUTURE-IMPROVEMENTS.md)** - 30 enhancement ideas
+- **[QUICK-IMPLEMENTATION-GUIDE.md](QUICK-IMPLEMENTATION-GUIDE.md)** - Ready-to-use code
+
+## 🐛 Troubleshooting
+
+### Application won't start
+```bash
+# Check if port 8080 is in use
+netstat -ano | findstr :8080
+
+# Kill the process if needed
+taskkill /PID <process_id> /F
+
+# Try again
+run.bat run
+```
+
+### Maven errors
+```bash
+# Clean and rebuild
+run.bat clean
+run.bat build
+```
+
+### Dark mode not working
+- Clear browser cache (Ctrl+Shift+Delete)
+- Check browser console for JavaScript errors
+- Ensure LocalStorage is enabled
+
+### Copy buttons not working
+- Use a modern browser (Chrome, Firefox, Edge)
+- Check clipboard permissions
+- Try HTTPS instead of HTTP
+
+## 📞 Support
+
+- **🐛 Found a bug?** [Open an issue](https://github.com/your-repo/issues)
+- **💬 Have questions?** [Start a discussion](https://github.com/your-repo/discussions)
+- **✨ Feature request?** [Submit an idea](https://github.com/your-repo/issues/new?template=feature_request.md)
 
 ---
 
-**⭐ If this project helped you, please star the repository!**
+<div align="center">
 
-**🐛 Found a bug? [Open an issue](https://github.com/your-repo/issues)**
+**⭐ If this project helped you, please star the repository! ⭐**
 
-**💬 Questions? [Start a discussion](https://github.com/your-repo/discussions)**
+**Made with ❤️ and lots of ☕ for IBM Hackathon 2026**
+
+[🏠 Home](http://localhost:8080) • [📊 Evidence](http://localhost:8080/evidence) • [📖 Docs](SETUP-GUIDE.md)
+
+</div>
