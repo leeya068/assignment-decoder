@@ -3,29 +3,59 @@
 <head>
     <title>📚 Assignment Decoder with IBM Bob</title>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        /* Dark mode variables */
+        :root {
+            --bg-gradient-start: #667eea;
+            --bg-gradient-end: #764ba2;
+            --card-bg: white;
+            --text-primary: #333;
+            --text-secondary: #666;
+            --border-color: #ddd;
+            --input-bg: white;
+            --feature-bg: #f8f9fa;
+        }
+        
+        body.dark-mode {
+            --bg-gradient-start: #1a1a2e;
+            --bg-gradient-end: #16213e;
+            --card-bg: #0f3460;
+            --text-primary: #eee;
+            --text-secondary: #bbb;
+            --border-color: #444;
+            --input-bg: #1a1a2e;
+            --feature-bg: #1a1a2e;
+        }
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
             min-height: 100vh;
             padding: 20px;
+            transition: all 0.3s ease;
         }
+        
         .container {
             max-width: 800px;
             margin: 0 auto;
-            background: white;
+            background: var(--card-bg);
             border-radius: 20px;
             padding: 40px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
         }
+        
         h1 {
-            color: #333;
+            color: var(--text-primary);
             margin-bottom: 10px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
+        
         .bob-badge {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
@@ -35,32 +65,40 @@
             display: inline-block;
             margin-bottom: 20px;
         }
+        
         .form-group {
             margin-bottom: 20px;
         }
+        
         label {
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
-            color: #555;
+            color: var(--text-secondary);
         }
+        
         input, textarea, select {
             width: 100%;
             padding: 12px;
-            border: 2px solid #ddd;
+            border: 2px solid var(--border-color);
             border-radius: 10px;
             font-size: 16px;
             transition: border 0.3s;
+            background: var(--input-bg);
+            color: var(--text-primary);
         }
+        
         input:focus, textarea:focus {
             border-color: #667eea;
             outline: none;
         }
+        
         textarea {
             min-height: 150px;
             font-family: monospace;
         }
-        button {
+        
+        button[type="submit"] {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             border: none;
@@ -72,52 +110,146 @@
             width: 100%;
             transition: transform 0.2s;
         }
-        button:hover {
+        
+        button[type="submit"]:hover {
             transform: translateY(-2px);
         }
+        
         .feature-list {
             display: flex;
             gap: 15px;
             margin-top: 30px;
             flex-wrap: wrap;
         }
+        
         .feature {
             flex: 1;
-            background: #f8f9fa;
+            background: var(--feature-bg);
             padding: 15px;
             border-radius: 10px;
             text-align: center;
             font-size: 14px;
+            color: var(--text-primary);
         }
+        
         .feature span {
             font-size: 24px;
             display: block;
             margin-bottom: 8px;
         }
+        
         hr {
             margin: 30px 0;
+            border: none;
+            border-top: 1px solid var(--border-color);
         }
+        
         .evidence-link {
             text-align: center;
             margin-top: 20px;
         }
+        
         .evidence-link a {
             color: #667eea;
             text-decoration: none;
         }
+        
+        .container p {
+            color: var(--text-secondary);
+        }
+        
+        /* Dark mode toggle button */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #333;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            z-index: 1000;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .dark-mode-toggle:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Loading overlay */
+        #loadingOverlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .spinner {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #667eea;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            text-align: center;
+            color: white;
+        }
+        
+        .loading-text h2 {
+            margin: 20px 0;
+            color: white;
+        }
+        
+        .loading-text p {
+            color: #bbb;
+            margin: 10px 0;
+        }
     </style>
 </head>
 <body>
+    <!-- Dark Mode Toggle -->
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">
+        <span id="modeIcon">🌙</span> <span id="modeText">Dark</span>
+    </button>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay">
+        <div class="loading-text">
+            <div class="spinner"></div>
+            <h2>🤖 IBM Bob is Analyzing...</h2>
+            <p>Breaking down requirements • Generating code • Creating tests</p>
+            <p style="opacity:0.7;">This may take a few moments...</p>
+        </div>
+    </div>
+
     <div class="container">
         <div class="bob-badge">🤖 POWERED BY IBM BOB</div>
         <h1>
             📚 Assignment Decoder
         </h1>
-        <p style="color: #666; margin-bottom: 30px;">
+        <p style="margin-bottom: 30px;">
             Paste your assignment or upload PDF. IBM Bob will analyze, generate code stubs, write tests, and create a study schedule.
         </p>
         
-        <form action="/analyze" method="post" enctype="multipart/form-data">
+        <form action="/analyze" method="post" enctype="multipart/form-data" id="analysisForm">
             <div class="form-group">
                 <label>📖 Course Name</label>
                 <input type="text" name="courseName" placeholder="e.g., CS-101: Data Structures" required>
@@ -177,5 +309,29 @@
             <a href="/evidence">🔍 View IBM Bob Interaction Evidence →</a>
         </div>
     </div>
+
+    <script>
+        // Dark Mode Toggle
+        // Check saved preference on page load
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+            document.getElementById('modeIcon').textContent = '☀️';
+            document.getElementById('modeText').textContent = 'Light';
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark);
+            document.getElementById('modeIcon').textContent = isDark ? '☀️' : '🌙';
+            document.getElementById('modeText').textContent = isDark ? 'Light' : 'Dark';
+        }
+
+        // Loading Animation
+        document.getElementById('analysisForm').addEventListener('submit', function(e) {
+            // Show loading overlay
+            document.getElementById('loadingOverlay').style.display = 'flex';
+        });
+    </script>
 </body>
 </html>
