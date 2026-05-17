@@ -14,6 +14,7 @@ A Spring Boot web application that leverages IBM Bob AI to help students decode 
 - Slide deck: https://canva.link/73717iw7qvvxjcn
 - App walkthrough: https://youtu.be/_SRt1Tl-lS0
 - Pitching video: https://youtu.be/6wI2rCv4tgU
+- Live deployed app: https://assignment-decoder--leeyana686.replit.app/
 
 ## 🎯 Problem Statement
 
