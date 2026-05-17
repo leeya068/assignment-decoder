@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "name": "assignment-decoder",
+  "builds": [
+    {
+      "src": "pom.xml",
+      "use": "@vercel/java"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/"
+    }
+  ],
+  "env": {
+    "BOB_API_KEY": "@bob-api-key",
+    "BOB_API_URL": "@bob-api-url"
+  },
+  "regions": ["sin1"],
+  "functions": {
+    "src/**/*.java": {
+      "runtime": "java17",
+      "memory": 1024,
+      "maxDuration": 30
+    }
+  }
+}

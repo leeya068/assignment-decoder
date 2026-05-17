@@ -67,7 +67,21 @@ Without clear specifications, students waste hours:
 - 📚 **Constants Management** - Centralized constants for maintainability
 - 🎯 **HTTP Status Codes** - Proper REST API responses
 
-## 🚀 Quick Start
+## 🚀 Deployment Options
+
+**Choose your platform:**
+
+| Platform | Best For | Setup Time | Documentation |
+|----------|----------|------------|---------------|
+| 🟢 **Replit** | Hackathon demos, quick sharing | 5 min | [Quick Start](DEPLOYMENT-QUICK-START.md#option-1-replit-recommended-for-hackathons) |
+| 🐳 **Docker** | Production, cloud platforms | 15 min | [Docker Guide](DEPLOYMENT-GUIDE.md#option-2-docker-deployment) |
+| 🐍 **Streamlit** | Python demos, data science | 10 min | [Streamlit Guide](streamlit_demo/README.md) |
+| ⚡ **Vercel** | Frontend hosting (experimental) | 20 min | [Vercel Guide](DEPLOYMENT-GUIDE.md#option-4-vercel-experimental) |
+
+📖 **Full Deployment Guide:** [DEPLOYMENT-GUIDE.md](DEPLOYMENT-GUIDE.md)
+⚡ **Quick Start Guide:** [DEPLOYMENT-QUICK-START.md](DEPLOYMENT-QUICK-START.md)
+
+## 🚀 Quick Start (Local Development)
 
 ### Prerequisites
 - Java 17 or higher

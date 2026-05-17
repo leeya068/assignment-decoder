@@ -1,0 +1,63 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# IDE
+.vscode
+.idea
+*.iml
+*.iws
+*.ipr
+
+# Build artifacts
+target/
+*.class
+*.jar
+*.war
+
+# Maven
+.m2/
+.mvn/wrapper/maven-wrapper.jar
+
+# Logs
+*.log
+logs/
+
+# Evidence and test data
+evidence/
+bob_sessions/
+test-samples/
+
+# Documentation
+*.md
+!README.md
+
+# Streamlit demo
+streamlit_demo/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*~
+
+# Environment
+.env
+.env.local
+*.env
+
+# Replit
+.replit
+replit.nix
+run-replit.sh
+
+# Vercel
+.vercel
+vercel.json
+
+# Made with Bob

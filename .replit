@@ -1,0 +1,21 @@
+# Replit Configuration for Assignment Decoder
+run = "bash run-replit.sh"
+entrypoint = "src/main/java/com/hackathon/AssignmentDecoderApplication.java"
+hidden = [".config", "target", ".m2"]
+
+[nix]
+channel = "stable-23_11"
+
+[deployment]
+run = ["sh", "-c", "java -jar target/assignment-decoder-1.0.0.jar"]
+deploymentTarget = "cloudrun"
+
+[languages.java]
+pattern = "**/*.java"
+
+[languages.java.languageServer]
+start = "jdt-language-server"
+
+[[ports]]
+localPort = 8080
+externalPort = 80
