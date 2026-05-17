@@ -1,6 +1,7 @@
 package com.hackathon.util;
 
 import com.hackathon.exception.FileProcessingException;
+import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.slf4j.Logger;
@@ -10,10 +11,13 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.stream.Stream;
 
 /**
@@ -42,15 +46,16 @@ public final class FileUtils {
         String fileName = pdfFile.getOriginalFilename();
         logger.info("Extracting text from PDF: {}", fileName);
         
-        try (InputStream inputStream = pdfFile.getInputStream();
-             PDDocument document = PDDocument.load(inputStream)) {
+        PDDocument document = null;
+        try (InputStream inputStream = pdfFile.getInputStream()) {
+            document = Loader.loadPDF(inputStream.readAllBytes());
             
             PDFTextStripper stripper = new PDFTextStripper();
             String text = stripper.getText(document);
             
             if (text == null || text.trim().isEmpty()) {
                 throw new FileProcessingException(
-                    "PDF appears to be empty or contains no extractable text", 
+                    "PDF appears to be empty or contains no extractable text",
                     fileName
                 );
             }
@@ -61,10 +66,18 @@ public final class FileUtils {
         } catch (IOException e) {
             logger.error("Failed to extract text from PDF: {}", fileName, e);
             throw new FileProcessingException(
-                "Failed to extract text from PDF: " + e.getMessage(), 
-                fileName, 
+                "Failed to extract text from PDF: " + e.getMessage(),
+                fileName,
                 e
             );
+        } finally {
+            if (document != null) {
+                try {
+                    document.close();
+                } catch (IOException e) {
+                    logger.warn("Failed to close PDF document: {}", e.getMessage());
+                }
+            }
         }
     }
     
@@ -265,6 +278,190 @@ public final class FileUtils {
         }
         
         logger.info("Copied directory from {} to {}", source, target);
+    }
+    
+    /**
+     * Extracts text content from any supported file type.
+     * Supports: PDF, TXT, MD, JAVA, and other text files.
+     *
+     * @param file the file to extract text from
+     * @return extracted text content
+     * @throws FileProcessingException if extraction fails
+     */
+    public static String extractTextFromFile(MultipartFile file) {
+        if (file == null || file.isEmpty()) {
+            throw new IllegalArgumentException("File cannot be null or empty");
+        }
+        
+        String fileName = file.getOriginalFilename();
+        if (fileName == null) {
+            throw new IllegalArgumentException("File name cannot be null");
+        }
+        
+        String lowerFileName = fileName.toLowerCase();
+        
+        try {
+            // PDF files
+            if (lowerFileName.endsWith(".pdf")) {
+                return extractTextFromPdf(file);
+            }
+            
+            // Text-based files (TXT, MD, JAVA, etc.)
+            if (lowerFileName.endsWith(".txt") || 
+                lowerFileName.endsWith(".md") || 
+                lowerFileName.endsWith(".java") ||
+                lowerFileName.endsWith(".py") ||
+                lowerFileName.endsWith(".js") ||
+                lowerFileName.endsWith(".html") ||
+                lowerFileName.endsWith(".css") ||
+                lowerFileName.endsWith(".json") ||
+                lowerFileName.endsWith(".xml")) {
+                return extractTextFromTextFile(file);
+            }
+            
+            // DOCX files (if needed in future)
+            if (lowerFileName.endsWith(".docx")) {
+                logger.warn("DOCX file support not yet implemented: {}", fileName);
+                throw new FileProcessingException("DOCX files are not yet supported. Please convert to PDF or TXT.", fileName);
+            }
+            
+            // Unsupported file type
+            throw new FileProcessingException(
+                "Unsupported file type. Supported types: PDF, TXT, MD, JAVA, PY, JS, HTML, CSS, JSON, XML", 
+                fileName
+            );
+            
+        } catch (FileProcessingException e) {
+            throw e;
+        } catch (Exception e) {
+            logger.error("Failed to extract text from file: {}", fileName, e);
+            throw new FileProcessingException(
+                "Failed to extract text from file: " + e.getMessage(), 
+                fileName, 
+                e
+            );
+        }
+    }
+    
+    /**
+     * Extracts text from plain text files.
+     * 
+     * @param file the text file to read
+     * @return file content as string
+     * @throws IOException if reading fails
+     */
+    private static String extractTextFromTextFile(MultipartFile file) throws IOException {
+        String fileName = file.getOriginalFilename();
+        logger.info("Reading text file: {}", fileName);
+        
+        try (InputStream inputStream = file.getInputStream()) {
+            String text = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+            
+            if (text.trim().isEmpty()) {
+                throw new FileProcessingException("File appears to be empty", fileName);
+            }
+            
+            logger.info("Successfully read {} characters from text file", text.length());
+            return text.trim();
+        }
+    }
+    
+    /**
+     * Reads all files from a directory and extracts their content.
+     * Useful for analyzing student code submissions.
+     * 
+     * @param directory the directory to read from
+     * @return list of file contents with metadata
+     */
+    public static List<FileContent> readAllFilesFromDirectory(File directory) {
+        List<FileContent> fileContents = new ArrayList<>();
+        
+        if (directory == null || !directory.exists() || !directory.isDirectory()) {
+            logger.warn("Directory does not exist or is not a directory: {}", directory);
+            return fileContents;
+        }
+        
+        try (Stream<Path> paths = Files.walk(directory.toPath())) {
+            paths.filter(Files::isRegularFile)
+                 .forEach(path -> {
+                     try {
+                         File file = path.toFile();
+                         String fileName = file.getName();
+                         String relativePath = directory.toPath().relativize(path).toString();
+                         
+                         // Only read text-based files
+                         if (isTextFile(fileName)) {
+                             String content = Files.readString(path, StandardCharsets.UTF_8);
+                             fileContents.add(new FileContent(relativePath, fileName, content));
+                             logger.debug("Read file: {} ({} chars)", relativePath, content.length());
+                         }
+                     } catch (IOException e) {
+                         logger.warn("Could not read file: {}", path, e);
+                     }
+                 });
+        } catch (IOException e) {
+            logger.error("Failed to walk directory: {}", directory, e);
+        }
+        
+        return fileContents;
+    }
+    
+    /**
+     * Checks if a file is a text-based file that can be read.
+     * 
+     * @param fileName the file name to check
+     * @return true if file is text-based
+     */
+    private static boolean isTextFile(String fileName) {
+        String lower = fileName.toLowerCase();
+        return lower.endsWith(".java") ||
+               lower.endsWith(".py") ||
+               lower.endsWith(".js") ||
+               lower.endsWith(".ts") ||
+               lower.endsWith(".html") ||
+               lower.endsWith(".css") ||
+               lower.endsWith(".json") ||
+               lower.endsWith(".xml") ||
+               lower.endsWith(".txt") ||
+               lower.endsWith(".md") ||
+               lower.endsWith(".yml") ||
+               lower.endsWith(".yaml") ||
+               lower.endsWith(".properties") ||
+               lower.endsWith(".sql") ||
+               lower.endsWith(".sh") ||
+               lower.endsWith(".bat");
+    }
+    
+    /**
+     * Inner class to hold file content with metadata.
+     */
+    public static class FileContent {
+        private final String relativePath;
+        private final String fileName;
+        private final String content;
+        
+        public FileContent(String relativePath, String fileName, String content) {
+            this.relativePath = relativePath;
+            this.fileName = fileName;
+            this.content = content;
+        }
+        
+        public String getRelativePath() {
+            return relativePath;
+        }
+        
+        public String getFileName() {
+            return fileName;
+        }
+        
+        public String getContent() {
+            return content;
+        }
+        
+        @Override
+        public String toString() {
+            return String.format("// FILE: %s\n%s", relativePath, content);
+        }
     }
 }
 

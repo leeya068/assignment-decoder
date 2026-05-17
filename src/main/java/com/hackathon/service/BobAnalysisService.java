@@ -164,12 +164,12 @@ public class BobAnalysisService {
     // ========== PRIVATE HELPERS ==========
     
     private String buildAnalysisPrompt(String assignmentText, String courseName, File studentCodeFolder) {
-        String existingCode = readExistingCode(studentCodeFolder);
+        String existingCode = readExistingCodeEnhanced(studentCodeFolder);
         
         return String.format("""
             You are IBM Bob, an AI-powered development partner.
             
-            TASK: Analyze this programming assignment and create an actionable checklist.
+            TASK: Analyze this programming assignment and create an actionable checklist based on the uploaded files.
             
             COURSE: %s
             
@@ -184,8 +184,11 @@ public class BobAnalysisService {
             2. For each task: description, priority (HIGH/MEDIUM/LOW), estimated time (minutes), and which file to modify
             3. Identify which requirements are ALREADY satisfied by existing code (mark as complete)
             4. Flag any ambiguous requirements that need clarification
+            5. Analyze the uploaded files and provide specific recommendations based on their content
+            6. If code files are present, identify missing implementations, potential bugs, and improvement opportunities
             
             Be SPECIFIC. Instead of "implement sorting", write "implement bubble sort in sortArray() method".
+            Focus on the actual content of the uploaded files and provide tailored solutions.
             """, courseName, assignmentText, existingCode);
     }
     
@@ -604,6 +607,60 @@ public class BobAnalysisService {
             }
         }
         return code.length() > 0 ? code.toString() : "// No existing code found";
+    }
+    
+    /**
+     * Enhanced method to read all files from student code folder with better analysis.
+     * Uses the new FileUtils.readAllFilesFromDirectory method.
+     */
+    private String readExistingCodeEnhanced(File folder) {
+        if (folder == null || !folder.exists()) {
+            return "// No existing code found";
+        }
+        
+        StringBuilder analysis = new StringBuilder();
+        analysis.append("=== STUDENT CODE ANALYSIS ===\n\n");
+        
+        // Use enhanced file reading from FileUtils
+        java.util.List<FileUtils.FileContent> files = FileUtils.readAllFilesFromDirectory(folder);
+        
+        if (files.isEmpty()) {
+            return "// No code files found in the uploaded folder";
+        }
+        
+        analysis.append(String.format("Found %d file(s) in student submission:\n\n", files.size()));
+        
+        // Organize files by type
+        java.util.Map<String, java.util.List<FileUtils.FileContent>> filesByType = new java.util.HashMap<>();
+        for (FileUtils.FileContent file : files) {
+            String extension = getFileExtension(file.getFileName());
+            filesByType.computeIfAbsent(extension, k -> new java.util.ArrayList<>()).add(file);
+        }
+        
+        // Summarize file types
+        analysis.append("File Types:\n");
+        for (java.util.Map.Entry<String, java.util.List<FileUtils.FileContent>> entry : filesByType.entrySet()) {
+            analysis.append(String.format("  - %s files: %d\n", entry.getKey().toUpperCase(), entry.getValue().size()));
+        }
+        analysis.append("\n");
+        
+        // Include full content of each file
+        for (FileUtils.FileContent file : files) {
+            analysis.append("─".repeat(80)).append("\n");
+            analysis.append(String.format("FILE: %s\n", file.getRelativePath()));
+            analysis.append("─".repeat(80)).append("\n");
+            analysis.append(file.getContent()).append("\n\n");
+        }
+        
+        return analysis.toString();
+    }
+    
+    /**
+     * Helper method to get file extension.
+     */
+    private String getFileExtension(String fileName) {
+        int lastDot = fileName.lastIndexOf('.');
+        return lastDot > 0 ? fileName.substring(lastDot + 1) : "unknown";
     }
 
     private List<String> extractMissingItems(String bobResponse) {

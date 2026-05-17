@@ -91,13 +91,15 @@ public class DecoderController {
             tempDir = FileUtils.createTempDirectory();
             logger.debug("Created temp directory: {}", tempDir);
             
-            // Extract assignment text
+            // Extract assignment text from uploaded file or text input
             String assignmentText = request.getAssignmentText();
             if (request.getAssignmentPdf() != null && !request.getAssignmentPdf().isEmpty()) {
                 logger.info(AppConstants.LOG_FILE_UPLOAD,
                     request.getAssignmentPdf().getOriginalFilename(),
                     request.getAssignmentPdf().getSize());
-                assignmentText = FileUtils.extractTextFromPdf(request.getAssignmentPdf());
+                // Use enhanced file reading that supports multiple formats
+                assignmentText = FileUtils.extractTextFromFile(request.getAssignmentPdf());
+                logger.info("Successfully extracted assignment content from uploaded file");
             }
             
             // Handle student code upload
