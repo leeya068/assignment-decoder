@@ -9,6 +9,12 @@ A Spring Boot web application that leverages IBM Bob AI to help students decode 
 [![Maven](https://img.shields.io/badge/Maven-3.9.15-blue.svg)](https://maven.apache.org/)
 [![IBM Bob](https://img.shields.io/badge/IBM%20Bob-AI%20Powered-blue.svg)](https://ibm.com)
 
+## Pitching Materials
+
+Slide deck: https://canva.link/73717iw7qvvxjcn
+App walkthrough: https://youtu.be/_SRt1Tl-lS0
+Pitching video: https://youtu.be/6wI2rCv4tgU
+
 ## 🎯 Problem Statement
 
 Students often receive vague programming assignments like:
